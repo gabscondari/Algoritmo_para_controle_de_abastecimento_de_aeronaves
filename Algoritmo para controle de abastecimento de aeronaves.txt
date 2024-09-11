@@ -1,0 +1,60 @@
+programa {
+
+	funcao inicio()
+	{
+	    real voo[6]
+	    real trecho_total
+	    real combustivel_total
+	    
+		mensagem_inicial()
+		
+		cadastro_aeronave(voo)
+		
+		trecho_total = soma(voo[4], voo[5])
+		
+		combustivel_total = calcular_combustivel(trecho_total, voo[2])
+		
+      	verificacao(voo, trecho_total, combustivel_total)
+	}
+		
+	funcao mensagem_inicial(){
+		escreva("-----Bem-vindo ao sistema de controle da aeronave-----\n")
+	}
+	
+	funcao cadastro_aeronave(real voo[]) {
+        escreva("\nInforme a capacidade do tanque em litros: ")
+        leia(voo[1])
+        escreva("\nInforme o consumo medio da aeronave em litros/quilometros: ")
+        leia(voo[2])
+        escreva("\nInforme a quantidade ja disponível no tanque de combustivel da aeronave em litros: ")
+        leia(voo[3])
+        escreva("\nInforme o trecho planejado em quilomentros: ")
+        leia(voo[4])
+        escreva("\nInforme o trecho alternativo em quilomentros: ")
+        leia(voo[5])
+    }
+     
+    funcao real soma(real trecho_planejado, real trecho_alternativo){
+        retorne trecho_planejado + trecho_alternativo
+    }
+    
+    funcao real calcular_combustivel(real trecho_total, real consumo_medio) {
+        retorne (trecho_total * consumo_medio * 1.3)
+    }
+
+	funcao verificacao(real voo[], real trecho_total, real combustivel_total) {
+		se (combustivel_total > voo[1]) {
+          	escreva("\nVoo Reprovado, reveja seu planejamento")
+		} senao {
+		    real combustivel_acarregar = combustivel_total - voo[3]
+		    real trecho_emergencial = trecho_total * 1.3
+		    
+           	escreva("\nVoo Aprovado, bom voo!\n")
+          	escreva("\nO valor do trecho planejado é de ", voo[4],"km" )
+           	escreva("\nO valor do trecho alternativo é de ", voo[5],"km")
+           	escreva("\nO valor do trecho emergencial é de ", trecho_emergencial,"km")
+           	escreva("\nA quantidade de combustivel necessario é de ", combustivel_total,"l")
+           	escreva("\nA aeronave deve carregar-se com: ", combustivel_acarregar,"l")
+		}	
+	}
+}
